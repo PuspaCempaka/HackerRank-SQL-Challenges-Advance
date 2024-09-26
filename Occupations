@@ -1,0 +1,16 @@
+/*
+Create a column using row_number and over clauses to create the space for the name row after we pivot the table.
+note: The output will be only one line if we didn't create this column.
+Since Pivot need to use the aggregation function, so I choose the MAX() function to extract the name for each occupation.
+*/
+
+SELECT [Doctor] AS Doctors,
+       [Professor] AS Professors,
+       [Singer] AS Singers,
+       [Actor] AS Actors
+FROM
+(SELECT ROW_NUMBER() OVER(PARTITION BY Occupation ORDER BY Name) AS RN,
+        Name, Occupation
+FROM Occupations) AS T1
+PIVOT
+(MAX(Name) FOR Occupation IN ([Doctor],[Professor],[Singer],[Actor])) AS T2;
