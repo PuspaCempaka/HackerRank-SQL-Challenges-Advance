@@ -8,5 +8,6 @@ DECLARE @num int = 20;
  FROM StarCTE
  WHERE cnt < @num)
  
-SELECT Triangle
-FROM StarCTE;
+SELECT Triangle 
+FROM StarCTE
+ORDER BY Triangle DESC;
