@@ -1,0 +1,12 @@
+DECLARE @star varchar(40) = '* ';
+DECLARE @num int = 20;
+ 
+; WITH StarCTE AS
+(SELECT CAST(@star AS varchar(40)) AS Triangle, 1 AS cnt
+ UNION ALL
+ SELECT CAST((Triangle+@star) AS varchar(40)) AS Triangle, cnt+1 AS cnt
+ FROM StarCTE
+ WHERE cnt < @num)
+ 
+SELECT Triangle
+FROM StarCTE;
